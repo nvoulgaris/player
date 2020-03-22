@@ -1,9 +1,9 @@
 import express from 'express'
 import body_parser from 'body-parser'
 import morgan from 'morgan'
+import config from './config/index.js'
 import { connect } from './persistence/db.js'
 
-const port = 3000
 const app = express()
 
 app.use(morgan('dev'))
@@ -18,8 +18,8 @@ export {app}
 export const start = async () => {
 	try {
 		await connect()
-		app.listen(port, () => {
-			console.log(`Server listening on port ${port}`)
+		app.listen(config.port, () => {
+			console.log(`Server listening on port ${config.port}`)
 		})
 	} catch (e) {
 		console.error(`Could not start the application ${e}`)
